@@ -56,3 +56,21 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+
+
+
+
+
+'''
+import dns.resolver
+
+myResolver = dns.resolver.Resolver()
+myResolver.nameservers = ['8.8.8.8', '8.8.4.4']
+myAnswers = myResolver.resolve("www.momoshop.com.tw")
+for rdata in myAnswers:
+    ip = str(rdata)
+
+print(ip)
+'''
