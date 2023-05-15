@@ -64,13 +64,13 @@ if __name__ == '__main__':
 
 
 '''
-import dns.resolver
+    import dns.resolver
 
-myResolver = dns.resolver.Resolver()
-myResolver.nameservers = ['8.8.8.8', '8.8.4.4']
-myAnswers = myResolver.resolve("www.momoshop.com.tw")
-for rdata in myAnswers:
-    ip = str(rdata)
+    resolver = dns.resolver.Resolver()
+    resolver.nameservers = ['8.8.8.8', '8.8.4.4']
+    answers = resolver.resolve("video.cloud.edu.tw")
+    for data in answers:
+        ip = str(data)
 
-print(ip)
+    print(ip)
 '''
