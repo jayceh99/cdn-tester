@@ -18,12 +18,12 @@ def get_server_organization(ip_port):
         if '網段' in str(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td/text()')) :
             print('--------------------------------------------')
             tmp_data  = format_data(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td/text()'))
-            print(f"{tmp_data[0]:<20}:{tmp_data[1]:>20}  |")
+            print(f"{tmp_data[0]:<20}:{tmp_data[1]:>20}")
 
 
             #print(tmp_data[0]+'     :     '+tmp_data[1])
         if len(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td')) == 2 :
-            print(f"{format_data(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td[1]/text()')):<20}:{format_data(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td[2]/text()')):>20}  |")
+            print(f"{format_data(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td[1]/text()')):<20}:{format_data(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td[2]/text()')):>20}")
 
 
 
@@ -50,6 +50,7 @@ def format_ip_info(ip_port):
 
 def main():
     url = 'https://video.cloud.edu.tw/video/co_video_content.php?p=401467'
+    url = 'https://media.video.cloud.edu.tw/vod/_definst_/mp4:uploads.video/2023/04/video_401468_1440.mp4/manifest.mpd'
     get_server_organization(get_server_ip(url))
 
 
