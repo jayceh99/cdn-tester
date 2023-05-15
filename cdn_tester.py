@@ -51,6 +51,7 @@ def format_ip_info(ip_port):
 def main():
     url = 'https://video.cloud.edu.tw/video/co_video_content.php?p=401467'
     url = 'https://media.video.cloud.edu.tw/vod/_definst_/mp4:uploads.video/2023/04/video_401468_1440.mp4/manifest.mpd'
+    url = 'https://media.video.cloud.edu.tw/vod/_definst_/mp4:uploads.video/2023/04/video_401468_1440.mp4/chunk_ctvideo_ridp0va0br708614_cs5400000_mpd.m4s'
     get_server_organization(get_server_ip(url))
 
 
