@@ -4,28 +4,27 @@ from lxml import html
 
 def get_server_ip(url):
     r = requests.get(url, stream=True)
-    #print('local IP port is '+str(r.raw._connection.sock.getsockname()))
-    #print(str(r.raw._connection.sock.getpeername()))
-    return str(r.raw._connection.sock.getpeername())
+    return str(r.raw._connection.sock.getpeername()) , str(r.raw._connection.sock.getsockname())
 
 def get_server_organization(ip_port):
-    ip_port = format_ip_info(ip_port)
-    print ('\n\nserver IP port is '+ip_port[0]+':'+ip_port[1]+'\n\n')
-    r = requests.get(r'https://whois.tanet.edu.tw/showWhoisPublic.php?queryString='+str(ip_port[0])+'&submit=%E9%80%81%E5%87%BA')
+    server_ip , your_ip = (ip_port)
+    server_ip = format_ip_info(server_ip)
+    your_ip = format_ip_info(your_ip)
+    tb = pt.PrettyTable()
+    tb.field_names = ['key','value']
+    tb.add_row(['Your IP',your_ip[0]])
+    tb.add_row(['Server IP',server_ip[0]])
+    r = requests.get(r'https://whois.tanet.edu.tw/showWhoisPublic.php?queryString='+str(server_ip[0])+'&submit=%E9%80%81%E5%87%BA')
     data = html.fromstring(r.content.decode('UTF-8'))
     max = len(data.xpath('/html/body/center/table[2]/tr'))
 
-    tb = pt.PrettyTable()
-    tb.field_names = ['key','value']
-    first_time = 1
+
     for i in range(1,max):
         if '網段' in str(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td/text()')) :
             tmp_data  = format_data(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td/text()'))
             key = format_data(str(tmp_data[0]))
             value = format_data(str(tmp_data[1]))
-            if first_time == 0 :
-                tb.add_row(['-'*30,'-'*30])
-            first_time = 0 
+            tb.add_row(['-'*30,'-'*30])
             tb.add_row([key,value])
 
         if len(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td')) == 2 :
@@ -52,8 +51,8 @@ def format_ip_info(ip_port):
 
 
 def main():
-    url = 'https://video.cloud.edu.tw/video/co_video_content.php?p=401467'
-    url = 'https://media.video.cloud.edu.tw/vod/_definst_/mp4:uploads.video/2023/04/video_401468_1440.mp4/manifest.mpd'
+    #url = 'https://video.cloud.edu.tw/video/co_video_content.php?p=401467'
+    #url = 'https://media.video.cloud.edu.tw/vod/_definst_/mp4:uploads.video/2023/04/video_401468_1440.mp4/manifest.mpd'
     url = 'https://media.video.cloud.edu.tw/vod/_definst_/mp4:uploads.video/2023/04/video_401468_1440.mp4/chunk_ctvideo_ridp0va0br708614_cs5400000_mpd.m4s'
     get_server_organization(get_server_ip(url))
 
