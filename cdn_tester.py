@@ -1,4 +1,5 @@
 import requests
+import prettytable as pt
 from lxml import html
 
 def get_server_ip(url):
@@ -14,24 +15,32 @@ def get_server_organization(ip_port):
     data = html.fromstring(r.content.decode('UTF-8'))
     max = len(data.xpath('/html/body/center/table[2]/tr'))
 
+    tb1 = pt.PrettyTable()
+    tb1.field_names = ['key','value']
     for i in range(1,max):
         if '網段' in str(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td/text()')) :
-            print('--------------------------------------------')
             tmp_data  = format_data(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td/text()'))
-            print(f"{tmp_data[0]:<20}:{tmp_data[1]:>20}")
-
+            #print(f"{tmp_data[0]:<20}:{tmp_data[1]:>20}")
+            key = format_data(str(tmp_data[0]))
+            value = format_data(str(tmp_data[1]))
+            tb1.add_row(['-'*30,'-'*30])
+            tb1.add_row([key,value])
 
             #print(tmp_data[0]+'     :     '+tmp_data[1])
         if len(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td')) == 2 :
-            print(f"{format_data(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td[1]/text()')):<20}:{format_data(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td[2]/text()')):>20}")
-
-
+            #print(f"{format_data(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td[1]/text()')):<20}:{format_data(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td[2]/text()')):>20}")
+            key = format_data(str(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td[1]/text()')))
+            value = format_data(str(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td[2]/text()')))
+            tb1.add_row([key,value])
+            
 
             #print(format_data(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td[1]/text()'))+'     :     ',end='')
             #print(format_data(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td[2]/text()')))
             
         
-    print('--------------------------------------------')
+    print(tb1)
+
+    
 
 
 def format_data(data):
