@@ -11,9 +11,9 @@ def get_server_organization(ip_port):
     server_ip = format_ip_info(server_ip)
     your_ip = format_ip_info(your_ip)
     tb = pt.PrettyTable()
-    tb.field_names = ['key','value']
-    tb.add_row(['Your IP',your_ip[0]])
-    tb.add_row(['Server IP',server_ip[0]])
+    tb.field_names = ['Key','Value']
+    tb.add_row(['My IP Address',your_ip[0]])
+    tb.add_row(['Server IP Address',server_ip[0]])
     r = requests.get(r'https://whois.tanet.edu.tw/showWhoisPublic.php?queryString='+str(server_ip[0])+'&submit=%E9%80%81%E5%87%BA')
     data = html.fromstring(r.content.decode('UTF-8'))
     max = len(data.xpath('/html/body/center/table[2]/tr'))
@@ -52,8 +52,8 @@ def format_ip_info(ip_port):
 
 def main():
     #url = 'https://video.cloud.edu.tw/video/co_video_content.php?p=401467'
-    #url = 'https://media.video.cloud.edu.tw/vod/_definst_/mp4:uploads.video/2023/04/video_401468_1440.mp4/manifest.mpd'
-    url = 'https://media.video.cloud.edu.tw/vod/_definst_/mp4:uploads.video/2023/04/video_401468_1440.mp4/chunk_ctvideo_ridp0va0br708614_cs5400000_mpd.m4s'
+    url = 'https://media.video.cloud.edu.tw/vod/_definst_/mp4:uploads.video/2023/04/video_401468_1440.mp4/manifest.mpd'
+    #url = 'https://media.video.cloud.edu.tw/vod/_definst_/mp4:uploads.video/2023/04/video_401468_1440.mp4/chunk_ctvideo_ridp0va0br708614_cs5400000_mpd.m4s'
     get_server_organization(get_server_ip(url))
 
 
