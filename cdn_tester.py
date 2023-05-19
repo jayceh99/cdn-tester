@@ -26,7 +26,6 @@ def get_server_organization(ip_port):
             value = format_data(str(tmp_data[1]))
             tb.add_row(['-'*30,'-'*30])
             tb.add_row([key,value])
-
         if len(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td')) == 2 :
             key = format_data(str(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td[1]/text()')))
             value = format_data(str(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td[2]/text()')))
