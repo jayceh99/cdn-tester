@@ -52,8 +52,8 @@ class cdn_tester:
 
     def httping(self):
         strat_time = time.time()
-        r  = requests.get('https://'+self.domain , stream=True)
-        #r = requests.get('https://media.video.cloud.edu.tw/vod/_definst_/mp4:uploads.video/2023/04/video_401468_1440.mp4/manifest.mpd' , stream=True)
+        #r  = requests.get('https://'+self.domain , stream=True)
+        r = requests.get('https://media.video.cloud.edu.tw/vod/_definst_/mp4:uploads.video/2023/04/video_401468_1440.mp4/manifest.mpd' , stream=True)
         if r.status_code == 200 :
             return str(int(((time.time() - strat_time)*1000))) +' ms'
         else :
@@ -128,8 +128,8 @@ class cdn_tester1:
 
     def httping(self):
         strat_time = time.time()
-        r  = requests.get('https://'+self.domain , stream=True)
-        #r = requests.get('https://media.video.cloud.edu.tw/vod/_definst_/mp4:uploads.video/2023/04/video_401468_1440.mp4/manifest.mpd' , stream=True)
+        #r  = requests.get('https://'+self.domain , stream=True)
+        r = requests.get('https://media.video.cloud.edu.tw/vod/_definst_/mp4:uploads.video/2023/04/video_401468_1440.mp4/manifest.mpd' , stream=True)
         if r.status_code == 200 :
             return str(int(((time.time() - strat_time)*1000))) +' ms' , str(r.raw._connection.sock.getsockname())
         else :
