@@ -55,7 +55,7 @@ class cdn_tester:
         r  = requests.get('https://'+self.domain , stream=True)
         #r = requests.get('https://media.video.cloud.edu.tw/vod/_definst_/mp4:uploads.video/2023/04/video_401468_1440.mp4/manifest.mpd' , stream=True)
         if r.status_code == 200 :
-            return str(time.time() - strat_time) + '  s'
+            return str(int(((time.time() - strat_time)*1000))) +' ms'
         else :
             return 'test failed' 
         
@@ -131,7 +131,7 @@ class cdn_tester1:
         r  = requests.get('https://'+self.domain , stream=True)
         #r = requests.get('https://media.video.cloud.edu.tw/vod/_definst_/mp4:uploads.video/2023/04/video_401468_1440.mp4/manifest.mpd' , stream=True)
         if r.status_code == 200 :
-            return str(time.time() - strat_time) +'  s' , str(r.raw._connection.sock.getsockname())
+            return str(int(((time.time() - strat_time)*1000))) +' ms' , str(r.raw._connection.sock.getsockname())
         else :
             return 'test failed' , str(r.raw._connection.sock.getsockname())
     
@@ -205,7 +205,7 @@ def main():
     
 
     domain = "media.video.cloud.edu.tw"
-    cdn_tester_q = cdn_tester(domain)
+    cdn_tester_q = cdn_tester1(domain)
     cdn_tester_q.get_server_organization()
 
 if __name__ == '__main__':
