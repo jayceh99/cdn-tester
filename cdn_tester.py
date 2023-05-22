@@ -21,7 +21,7 @@ class cdn_tester:
         tb.add_row(['Domain Name',self.domain])
         tb.add_row(['My IP Address',my_ip[0]])
         tb.add_row(['Server IP Address',server_ip])
-        tb.add_row(['httping',str(httping)+' s'])
+        tb.add_row(['httping',httping])
         r = requests.get(r'https://whois.tanet.edu.tw/showWhoisPublic.php?queryString='+str(server_ip)+'&submit=%E9%80%81%E5%87%BA')
         data = html.fromstring(r.content.decode('UTF-8'))
         max = len(data.xpath('/html/body/center/table[2]/tr'))
@@ -55,7 +55,7 @@ class cdn_tester:
         r  = requests.get('https://'+self.domain , stream=True)
         #r = requests.get('https://media.video.cloud.edu.tw/vod/_definst_/mp4:uploads.video/2023/04/video_401468_1440.mp4/manifest.mpd' , stream=True)
         if r.status_code == 200 :
-            return time.time() - strat_time
+            return str(time.time() - strat_time) + '  s'
         else :
             return 'test failed' 
         
@@ -97,7 +97,7 @@ class cdn_tester1:
         tb.add_row(['Domain Name',self.domain])
         tb.add_row(['My IP Address',my_ip[0]])
         tb.add_row(['Server IP Address',server_ip])
-        tb.add_row(['httping',str(httping)+' s'])
+        tb.add_row(['httping',httping])
         r = requests.get(r'https://whois.tanet.edu.tw/showWhoisPublic.php?queryString='+str(server_ip)+'&submit=%E9%80%81%E5%87%BA')
         data = html.fromstring(r.content.decode('UTF-8'))
         max = len(data.xpath('/html/body/center/table[2]/tr'))
@@ -129,8 +129,9 @@ class cdn_tester1:
     def httping(self):
         strat_time = time.time()
         r  = requests.get('https://'+self.domain , stream=True)
+        #r = requests.get('https://media.video.cloud.edu.tw/vod/_definst_/mp4:uploads.video/2023/04/video_401468_1440.mp4/manifest.mpd' , stream=True)
         if r.status_code == 200 :
-            return time.time() - strat_time , str(r.raw._connection.sock.getsockname())
+            return str(time.time() - strat_time) +'  s' , str(r.raw._connection.sock.getsockname())
         else :
             return 'test failed' , str(r.raw._connection.sock.getsockname())
     
