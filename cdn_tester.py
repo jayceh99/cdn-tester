@@ -4,7 +4,6 @@ from lxml import html
 import dns.resolver
 import socket
 import time  
-
 class cdn_tester:
     def __init__(self,domain):
         self.domain = domain
@@ -198,15 +197,29 @@ def format_ip_info(ip_port):
 
 
 def main():
+
+    mode = input("select mode:\n")
+
+
+    if mode == '1':
     #url = 'https://video.cloud.edu.tw/video/co_video_content.php?p=401467'
     #url = 'https://media.video.cloud.edu.tw/vod/_definst_/mp4:uploads.video/2023/04/video_401468_1440.mp4/manifest.mpd'
-#    url = 'https://media.video.cloud.edu.tw/vod/_definst_/mp4:uploads.video/2023/04/video_401468_1440.mp4/chunk_ctvideo_ridp0va0br708614_cs5400000_mpd.m4s'
-#    get_server_organization(get_server_ip(url))
+        url = 'https://media.video.cloud.edu.tw/vod/_definst_/mp4:uploads.video/2023/04/video_401468_1440.mp4/chunk_ctvideo_ridp0va0br708614_cs5400000_mpd.m4s'
+        get_server_organization(get_server_ip(url))
     
+    elif mode == '2':
+        domain = "media.video.cloud.edu.tw"
+        cdn_tester_q = cdn_tester(domain)
+        cdn_tester_q.get_server_organization()
 
-    domain = "media.video.cloud.edu.tw"
-    cdn_tester_q = cdn_tester1(domain)
-    cdn_tester_q.get_server_organization()
+    elif mode == '3':
+        domain = "media.video.cloud.edu.tw"
+        cdn_tester_q = cdn_tester1(domain)
+        cdn_tester_q.get_server_organization()
+    
+    elif mode == '4':
+        my_ip = input('IP Addr:\n')
+        cdn_remote_tester.cdn_remote_tester(my_ip)
 
 if __name__ == '__main__':
     main()

@@ -1,8 +1,8 @@
 import dns
 import clientsubnetoption
-import dns.resolver
-
-ip = 'IP_addr'
+#210.240.152.121
+#140.111.67.82
+ip = '210.240.152.121'
 edns_info = clientsubnetoption.ClientSubnetOption(ip)
 message = dns.message.make_query('media.video.cloud.edu.tw', 'A')
 message.use_edns(options=[edns_info])
