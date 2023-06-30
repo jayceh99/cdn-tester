@@ -14,17 +14,17 @@ def get_server_organization(domain , server_ip , client_ip , httping = None):
     r = requests.get(r'https://whois.tanet.edu.tw/showWhoisPublic.php?queryString='+str(server_ip)+'&submit=%E9%80%81%E5%87%BA')
     data = html.fromstring(r.content.decode('UTF-8'))
     max = len(data.xpath('/html/body/center/table[2]/tr'))
-
+    flag = False
 
     for i in range(1,max):
-        if '網段' in str(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td/text()')) :
+        if '用戶單位' in str(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td/text()')) :
             tmp_data  = format_data(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td/text()'))
             key = format_data(str(tmp_data[0]))
             value = format_data(str(tmp_data[1]))
             tb.add_row(['-'*30,'-'*30])
             tb.add_row([key,value])
-
-        if len(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td')) == 2 :
+            flag = True
+        if len(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td')) == 2 and flag == True:
             key = format_data(str(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td[1]/text()')))
             value = format_data(str(data.xpath('/html/body/center/table[2]/tr['+str(i)+']/td[2]/text()')))
             tb.add_row([key,value])

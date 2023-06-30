@@ -16,7 +16,7 @@ def index():
         flag = flag +1
         if '<TABLE>' in k:
             break
-    tmp.insert(flag , '<h4> <b>Test Domain : media.video.cloud.edu.tw&nbsp</h4></b><h4> <b>YourIPaddr :&nbsp' + ip +'</h4></b><h4> <b>ServerIPaddr :&nbsp' + server_ip +'</h4></b>')
+    tmp.insert(flag , '<h4> <b>Test Domain : mediavideocloudedutw.tanetcdn.edu.tw &nbsp</h4></b><h4> <b>YourIPaddr :&nbsp' + ip +'</h4></b><h4> <b>ServerIPaddr :&nbsp' + server_ip +'</h4></b>')
 
     q = ''
     for a in tmp :
