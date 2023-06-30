@@ -6,7 +6,7 @@ import get_server_info
 #client_ip = '140.128.53.34'
 #140.128.51.17
 #203.68.43.10
-client_ip = '210.240.152.121'
+client_ip = '203.68.43.10'
 domain = 'mediavideocloudedutw.tanetcdn.edu.tw'
 dns_name = '140.111.34.135'
 edns_info = clientsubnetoption.ClientSubnetOption(client_ip)
