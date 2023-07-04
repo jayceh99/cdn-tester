@@ -63,11 +63,9 @@ def main():
     cdn_tester_q = cdn_tester(domain)
     get_server_ip = cdn_tester_q.dns_get_server_ip()
     client_ip = cdn_tester_q.get_client_ip()
-    #httping = cdn_tester_q.httping()
-    #get_server_info.get_server_organization(domain , get_server_ip ,  client_ip , httping)
-    get_server_info.get_server_organization(domain , get_server_ip ,  client_ip , '123')
-    #del cdn_tester_q , get_server_ip , client_ip , httping 
-    del cdn_tester_q , get_server_ip , client_ip 
+    httping = cdn_tester_q.httping()
+    get_server_info.get_server_organization(domain , get_server_ip ,  client_ip , httping)
+    del cdn_tester_q , get_server_ip , client_ip , httping 
     
 if __name__ == '__main__':
     main()
