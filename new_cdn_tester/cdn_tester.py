@@ -60,9 +60,10 @@ class cdn_tester:
         return ip_port
         
 def main():
-
+    
     #domain = "media.video.cloud.edu.tw"
     domain = "mediavideocloudedutw.tanetcdn.edu.tw"
+    '''
     opt = input('select dns   cht  or  moe \n')
     if opt  == 'cht':
         dns_name = '168.95.1.1'
@@ -70,12 +71,19 @@ def main():
 
     elif opt == 'moe':
         dns_name = '140.111.34.135'
-    cdn_tester_q = cdn_tester(domain,dns_name)
-    get_server_ip = cdn_tester_q.dns_get_server_ip()
-    client_ip = cdn_tester_q.get_client_ip()
-    httping = cdn_tester_q.httping()
-    get_server_info.get_server_organization(domain , get_server_ip ,  client_ip , dns_name=dns_name , httping=httping)
-    del cdn_tester_q , get_server_ip , client_ip , httping 
+    '''
+    
+    
+    dns_name_s = ['168.95.1.1','140.111.34.135']
+    for dns_name in dns_name_s:
+        os.popen('ipconfig/flushdns')
+        cdn_tester_q = cdn_tester(domain,dns_name)
+        get_server_ip = cdn_tester_q.dns_get_server_ip()
+        client_ip = cdn_tester_q.get_client_ip()
+        httping = cdn_tester_q.httping()
+        get_server_info.get_server_organization(domain , get_server_ip ,  client_ip , dns_name=dns_name , httping=httping)
+        del cdn_tester_q , get_server_ip , client_ip , httping 
+        time.sleep(90)
 
     
 if __name__ == '__main__':
