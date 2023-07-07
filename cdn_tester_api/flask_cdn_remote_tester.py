@@ -1,25 +1,10 @@
-import dns
-import clientsubnetoption
-import flask_get_server_info
-
+import os
 
 def remote_tester(ip):
-    global server_ip 
-    #210.240.152.121
-    #140.111.67.82#
-    #client_ip = '140.128.53.34'
-    client_ip = ip
+    print(ip)
     domain = 'mediavideocloudedutw.tanetcdn.edu.tw'
-    edns_info = clientsubnetoption.ClientSubnetOption(client_ip)
-    message = dns.message.make_query(domain, 'A')
-    message.use_edns(options=[edns_info])
-    r = dns.query.udp(message, '140.111.34.135')
-
-    for answer in r.answer:
-        if answer.rdtype == dns.rdatatype.A:
-            for item in answer.items:
-                server_ip = item.address
-    tb = flask_get_server_info.get_server_organization(domain , server_ip , client_ip)
+    tmp = os.popen(' dig @cdn-nsysu-cdrs03.tanetcdn.edu.tw mediavideocloudedutw.tanetcdn.edu.tw +subnet='+ip+' +short')
+    server_ip = tmp.read().replace('\n','')
 
     #del client_ip , domain , edns_info , message , r ,answer , item , server_ip
     return server_ip
