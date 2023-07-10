@@ -1,0 +1,13 @@
+{
+    "domain": "mediavideocloudedutw.tanetcdn.edu.tw",
+    "requests_target": "https://media.video.cloud.edu.tw/vod/_definst_/mp4:uploads.video/2021/09/video_391972_1080.mp4/manifest.mpd",
+    "dns": [
+        {
+          "ip":"1.1.1.1"
+        },
+        {
+          "ip":"8.8.8.8"
+        }
+      ]
+
+  }
